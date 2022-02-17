@@ -6,6 +6,7 @@ import LoginForm from '../../containers/auth/LoginForm';
 import Header from '../../components/common/Header';
 import MyPage from '../../components/mypage/MyPage';
 import { tempSetUser, loginCheck, logout } from '../../modules/user';
+import { Redirect } from 'react-router';
 
 const MyPageContainer = () => { 
     let isLogin = true; // 추후 수정 필요
@@ -20,14 +21,15 @@ const MyPageContainer = () => {
     return (
         <div>
             <Header/>
-            {isLogin ? // 서버 구현 후 user로 수정
-                (<MyPage user={user} onLogout={onLogout}/>)
+            {user ? // 서버 구현 후 user로 수정
+                <MyPage onLogout={onLogout}/>
                 :
-                (
-                    <AuthTemplate>
-                        <LoginForm />
-                    </AuthTemplate>
-                )
+                (<Redirect to="/login" />)
+                // (
+                //     <AuthTemplate>
+                //         <LoginForm />
+                //     </AuthTemplate>
+                // )
             }
         </div>
     );

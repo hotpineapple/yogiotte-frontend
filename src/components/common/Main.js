@@ -27,9 +27,9 @@ function Main() {
         <Route component={ReviewListPage} path={'/reviews/:rid'} />
         <Route component={SearchPage} path={'/search'} />
         <Route component={LocationPage} path={'/location'} />  
-        <Route component={MyInfoPage} path={'/myinfo/:uid'} />  
-        <Route component={MyPlacePage} path={'/myplace/:uid'} />
-        <Route component={MyReviewPage} path={'/myreview/:uid'} />  
+        <Route component={MyInfoPage} path={'/myinfo'} />  
+        <Route component={MyPlacePage} path={'/myplace'} />
+        <Route component={MyReviewPage} path={'/myreview'} />  
         </>
     );
 }

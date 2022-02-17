@@ -45,13 +45,13 @@ const HomePage = () => {
                 <h3>테마별 맛집</h3>
                 <ul>
                     <li>
-                        <Link to="/places/restaurant"><RiRestaurant2Line /><div>레스토랑</div></Link>
+                        <Link to="/place/restaurant"><RiRestaurant2Line /><div>레스토랑</div></Link>
                     </li>
                     <li>
-                        <Link to="/places/cafe"><MdOutlineLocalCafe /><div>카페</div></Link>
+                        <Link to="/place/cafe"><MdOutlineLocalCafe /><div>카페</div></Link>
                     </li>
                     <li>
-                        <Link to="/places/bar" ><MdOutlineLocalBar /><div>바</div></Link>
+                        <Link to="/place/bar" ><MdOutlineLocalBar /><div>바</div></Link>
                     </li>
                 </ul>
             </Wrapper>

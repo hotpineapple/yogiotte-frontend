@@ -1,10 +1,10 @@
 import React from 'react';
 import MyInfoContainer from '../../containers/auth/MyInfoContainer';
 
-const MyInfoPage = ({match}) => {
+const MyInfoPage = () => {
     return (
         <div>
-            <MyInfoContainer match={match}/>
+            <MyInfoContainer />
         </div>
     );
 };

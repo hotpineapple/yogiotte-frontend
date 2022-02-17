@@ -1,20 +1,14 @@
 // import qs from 'qs';
 import client from './client';
 
-export const listPlaces = ({ category, keyword, location, user }) => {
-    // const queryString = qs.stringify({
-    //     category,
-    //     sort,
-    // });
-    // console.log('api call executed');
-    // return client.get(`/${category}`);
-    if (location) return client.get(`/restaurant`);
-    if (keyword) return client.get(`/${keyword}`);
-    if (user) return client.get(`/${user.username}`);
-    if (category) return client.get(`/${category}`);
+export const listPlaces = ({ type, category, keyword, location, user }) => {
 
-    return client.get(`/nothing`);
+    if (type === 'myplace') return client.get(`/${user.username}`);
+    else if (type === 'location') return client.get(`/${location.code}`);
+    else if (type === 'search') return client.get(`/${keyword}`);
+    else return client.get(`/${category}`);
 }
+
 
 export const placeDetail = ({ pid }) => {
     return client.get(`/${pid}`);

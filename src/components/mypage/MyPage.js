@@ -15,13 +15,12 @@ const MyPageBlock = styled(Responsive)`
         margin-bottom: 1rem;
     }
 `;
-const MyPage = ({ user, onLogout }) => {
-    // const { uid } = user;
-    const uid = 'zee1994';
-    const url1 = `/myinfo/${uid}`;
-    const url2 = `/myplace/${uid}`;
-    const url3 = `/myreview/${uid}`;
+const MyPage = ( { onLogout }) => {
 
+    const url1 = `/myinfo`;
+    const url2 = `/myplace`;
+    const url3 = `/myreview`;
+ 
     return (
         <MyPageBlock>
             <h3>마이페이지</h3>

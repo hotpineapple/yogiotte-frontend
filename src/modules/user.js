@@ -50,10 +50,10 @@ export default handleActions(
             user,
         }),
         [LOGIN_CHECK_SUCCESS]: (state, { payload: user }) => ({
-            ...state,
-            user,
-            loginCheckError: null,
-        }),
+                ...state,
+                user: { username: user.uname, password: user.upw },
+                loginCheckError: null,
+            }),
         [LOGIN_CHECK_FAILURE]: (state, { payload: error }) => ({
             ...state,
             user: null,

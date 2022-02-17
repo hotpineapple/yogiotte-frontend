@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { changeField, initializeForm, login } from '../../modules/auth';
 import AuthForm from '../../components/auth/AuthForm';
-import loginCheck from '../../modules/user';
+import { loginCheck } from '../../modules/user';
 // import user from '../../modules/user';
 
 const LoginForm = ({ history }) => {
@@ -40,12 +40,15 @@ const LoginForm = ({ history }) => {
     }, [dispatch]);
     
     useEffect(() => {
+        // if (authError) {
         if (authError) {
-            console.log(authError);
-            setError('아이디 또는 비밀번호가 틀립니다.');
+            if (authError) console.log(authError);
             return;
         }
-        if (auth) {
+        if(auth === false) {
+            setError('아이디 또는 비밀번호가 틀립니다.');
+            return;
+        } else if (auth === true) {
             console.log('로그인 성공');
             dispatch(loginCheck());
         }

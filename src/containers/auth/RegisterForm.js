@@ -5,7 +5,8 @@ import AuthForm from '../../components/auth/AuthForm';
 import { loginCheck } from '../../modules/user';
 import { withRouter } from 'react-router-dom';
 
-const RegisterForm = ({ history, savedInfo}) => {
+const RegisterForm = ({ history, savedInfo }) => {
+    console.log(savedInfo);
     const [error, setError] = useState(null);
     const dispatch = useDispatch();
 
@@ -75,7 +76,7 @@ const RegisterForm = ({ history, savedInfo}) => {
             console.log(authError);
             return;
         }
-        if (auth) {
+        if (!savedInfo && auth) {
             console.log('회원가입성공');
             console.log(auth);
             dispatch(loginCheck());
@@ -83,6 +84,8 @@ const RegisterForm = ({ history, savedInfo}) => {
     }, [auth, authError, dispatch]);
     
     useEffect(() => {
+        if (savedInfo) return;
+
         if (user) {
             console.log('로그인 확인 api 성공');
             console.log(user);

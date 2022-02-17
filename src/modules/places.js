@@ -9,14 +9,21 @@ const [
     LIST_PLACES_FAILURE,
 ] = createRequestActionTypes('places/LIST_PLACES');
 
+
+
 export const listPlaces = createAction(
     LIST_PLACES,
-    ({category, keyword, location, user}) => ({category, keyword, location, user}) 
+    ({ type,category,keyword,user,location }) => ({ type,category,keyword,user,location }) 
 );
 
+
+
 const listPlacesSaga = createRequestSaga(LIST_PLACES, placesAPI.listPlaces);
+
+
 export function* placesSaga() {
     yield takeLatest(LIST_PLACES, listPlacesSaga);
+
 }
 
 const initialState = {
@@ -35,6 +42,7 @@ const places = handleActions(
             ...state,
             error,
         }),
+
     },
     initialState
 );

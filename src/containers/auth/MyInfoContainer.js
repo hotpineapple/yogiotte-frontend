@@ -8,20 +8,15 @@ import MyPage from '../../components/mypage/MyPage';
 import { logout } from '../../modules/user';
 import RegisterForm from '../../containers/auth/RegisterForm';
 
-const MyInfoContainer = ({ match }) => {
-    // const { uid } = match.params;
-    // const { user } = useSelector(({ user }) =>  ({ user: user.user }));
-    const user = {
-        username: 'zee1994',
-        password: '1234',
-    };
-    // const dispatch = useDispatch();
+const MyInfoContainer = () => {
+    const { user } = useSelector(({ user }) => ({ user: user.user }));
+    const { username } = user;
 
     return (
         <div>
             <Header/>
             <AuthTemplate>
-                <RegisterForm savedInfo={user}/>
+                <RegisterForm savedInfo={username}/>
             </AuthTemplate>
         </div>
     );

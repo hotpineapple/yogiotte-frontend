@@ -43,7 +43,7 @@ export const editInfo = createAction(EDIT,({ username, password }) => ({
 
 const registerSaga = createRequestSaga(REGISTER, authAPI.register);
 const loginSaga = createRequestSaga(LOGIN, authAPI.login);
-const editSaga = createRequestSaga(LOGIN, authAPI.edit);
+const editSaga = createRequestSaga(LOGIN, );
 
 export function* authSaga() {
     yield takeLatest(REGISTER, registerSaga);
@@ -76,21 +76,21 @@ const auth = handleActions(
             [form]: initialState[form],
             authError: null,
         }),
-        [REGISTER_SUCCESS]:(state, { payload: auth }) => ({
+        [REGISTER_SUCCESS]: (state, { payload: auth }) => ({
             ...state,
             authError: null,
             auth,
         }),
-        [REGISTER_FAILURE]:(state, { payload: error }) => ({
+        [REGISTER_FAILURE]: (state, { payload: error }) => ({
             ...state,
             authError: error,
         }),
-        [LOGIN_SUCCESS]:(state, { payload: auth }) => ({
+        [LOGIN_SUCCESS]: (state, { payload: auth }) => ({
             ...state,
             authError: null,
             auth,
         }),
-        [LOGIN_FAILURE]:(state, { payload: error }) => ({
+        [LOGIN_FAILURE]: (state, { payload: error }) => ({
             ...state,
             authError: error,
         }),

@@ -48,7 +48,7 @@ const InputBlock = styled.div`
 
 
 const LocationInput = ({ location, isSearching,  onChangeField, onChangeField2 }) => {
-    console.log(location?.name);
+    // console.log(location?.name);
     const onChangeInput = e => {
         onChangeField(e.target.value)
         // onChangeField(locationCode);

@@ -2,7 +2,8 @@ import React from 'react';
 import PlaceListContainer from '../../containers/places/PlaceListContainer';
 import Header from '../../components/common/Header'
 
-const PlaceListPage = ({ type }) => {
+const PlaceListPage = ({ type, match }) => {
+    
     if (type === 'mainPage') {
         return (
             <>
@@ -10,10 +11,13 @@ const PlaceListPage = ({ type }) => {
             </>
         );
     }
+
+    const category = match.params.category;
+    // console.log(match.params.category);
     return (
         <>
             <Header />
-            <PlaceListContainer type={type}/>
+            <PlaceListContainer type={category}/>
         </>
     );
 };

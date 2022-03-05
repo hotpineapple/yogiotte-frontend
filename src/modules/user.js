@@ -5,14 +5,14 @@ import createRequestSaga, { createRequestActionTypes } from '../lib/createReques
 
 const TEMP_SET_USER = 'user/TEMP_SET_USER';
 const [LOGIN_CHECK, LOGIN_CHECK_SUCCESS, LOGIN_CHECK_FAILURE] = createRequestActionTypes('user/LOGIN_CHECK');
-const LOGOUT = 'user/LOGOUT';
+// const LOGOUT = 'user/LOGOUT';
 
 export const tempSetUser = createAction(TEMP_SET_USER, user => user);
 export const loginCheck = createAction(LOGIN_CHECK);
-export const logout = createAction(LOGOUT);
+// export const logout = createAction(LOGOUT);
 
 // const tempSetSaga = createRequestSaga(TEMP_SET_USER, );
-const checkSaga = createRequestSaga(LOGIN_CHECK, authAPI.isLogin);
+// const checkSaga = createRequestSaga(LOGIN_CHECK, authAPI.isLogin);
 
 function checkFailureSaga() {
     try {
@@ -24,8 +24,12 @@ function checkFailureSaga() {
 
 function* logoutSaga() {
     try {
+        // localStorage.removeItem('user');
         yield call(authAPI.logout);
+        // localStorage.clear();
         localStorage.removeItem('user');
+        console.log('로컬스토리지 지움');
+        console.log( localStorage.getItem('user'));
     } catch (e) {
         console.log(e);
     }
@@ -33,9 +37,9 @@ function* logoutSaga() {
 
 export function* userSaga() {
     // yield takeLatest(TEMP_SET_USER, tempSetSaga);
-    yield takeLatest(LOGIN_CHECK, checkSaga);
+    // yield takeLatest(LOGIN_CHECK, checkSaga);
     yield takeLatest(LOGIN_CHECK_FAILURE, checkFailureSaga);
-    yield takeLatest(LOGOUT, logoutSaga);
+    // yield takeLatest(LOGOUT, logoutSaga);
 }
 
 const initialState = {
@@ -49,20 +53,20 @@ export default handleActions(
             ...state,
             user,
         }),
-        [LOGIN_CHECK_SUCCESS]: (state, { payload: user }) => ({
-                ...state,
-                user: { username: user.uname, password: user.upw },
-                loginCheckError: null,
-            }),
-        [LOGIN_CHECK_FAILURE]: (state, { payload: error }) => ({
-            ...state,
-            user: null,
-            loginCheckError: error,
-        }),
-        [LOGOUT]: state => ({
-            ...state,
-            user: null,
-        })
+        // [LOGIN_CHECK_SUCCESS]: (state, { payload: user }) => ({
+        //         ...state,
+        //         user: { username: user.uname, password: user.upw },
+        //         loginCheckError: null,
+        //     }),
+        // [LOGIN_CHECK_FAILURE]: (state, { payload: error }) => ({
+        //     ...state,
+        //     user: null,
+        //     loginCheckError: error,
+        // }),
+        // [LOGOUT]: state => ({
+        //     ...state,
+        //     user: null,
+        // })
     },
     initialState,
 )

@@ -56,25 +56,28 @@ const ImageBox = styled.div`
 `;
 
 const PlaceItem = ({ place }) => {
-    const { id, name, location } = place;
-    const url = `/place/${id}`;
+    const { id, name, subtype, address, lat, lng, img } = place;
+    // console.log(`/place/one/${id}`);
+    const url = `/place/one/${id}`;
     // const url = `/place`;
     return (
         <PlaceItemBlock>
             <ImageBox>
                 <Link to={url}>
-                    <img src="/cafedam.jpg" />
+                    <img src={img} width="100%" height="100%" />
                 </Link>
             </ImageBox>
             <SubInfo>
-                <span>{name}</span>
-                <span>{location}</span>
+                <span style={{ fontWeight: 'bold' }}>{name}</span>
+                <span>{subtype}</span>
+                <span>{address}</span>
             </SubInfo>
         </PlaceItemBlock>
     );
 }
 
 const PlaceList = ({ title, loading, error, places }) => {
+
     if (error) {
         return (
             <div>에러가 발생했습니다.</div>

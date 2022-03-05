@@ -6,7 +6,7 @@ import { loginCheck } from '../../modules/user';
 import { withRouter } from 'react-router-dom';
 
 const RegisterForm = ({ history, savedInfo }) => {
-    console.log(savedInfo);
+    // console.log(savedInfo);
     const [error, setError] = useState(null);
     const dispatch = useDispatch();
 
@@ -76,27 +76,28 @@ const RegisterForm = ({ history, savedInfo }) => {
             console.log(authError);
             return;
         }
-        if (!savedInfo && auth) {
+        if (!savedInfo && auth === 'true') {
             console.log('회원가입성공');
-            console.log(auth);
-            dispatch(loginCheck());
+            history.push('/login');
+            // console.log(auth);
+            // dispatch(loginCheck());
         }
     }, [auth, authError, dispatch]);
     
-    useEffect(() => {
-        if (savedInfo) return;
+    // useEffect(() => {
+    //     if (savedInfo) return;
 
-        if (user) {
-            console.log('로그인 확인 api 성공');
-            console.log(user);
-            history.push('/');
-            try {
-                localStorage.setItem('user', JSON.stringify(user));
-            } catch (e) {
-                console.log('local storage is not working.');
-            }
-        }
-    }, [history,user]);
+    //     if (user) {
+    //         console.log('로그인 확인 api 성공');
+    //         console.log(user);
+    //         history.push('/');
+    //         try {
+    //             localStorage.setItem('user', JSON.stringify(user));
+    //         } catch (e) {
+    //             console.log('local storage is not working.');
+    //         }
+    //     }
+    // }, [history,user]);
 
     if (savedInfo) 
         return (

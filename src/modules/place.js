@@ -11,7 +11,7 @@ const [
 
 export const placeDetail = createAction(
     PLACE_DETAIL,
-    ({ pid }) => ({ pid })  
+    ({ id }) => ({ id })  
 );
 
 const placeDetailSaga = createRequestSaga(

@@ -1,38 +1,51 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Route, Link } from 'react-router-dom';
-import AuthTemplate from '../../components/auth/AuthTemplate';
-import LoginForm from '../../containers/auth/LoginForm';
 import Header from '../../components/common/Header';
 import MyPage from '../../components/mypage/MyPage';
-import { tempSetUser, loginCheck, logout } from '../../modules/user';
+import { logout } from '../../modules/auth';
 import { Redirect } from 'react-router';
+import { withRouter } from 'react-router-dom';
 
 const MyPageContainer = () => { 
-    let isLogin = true; // 추후 수정 필요
+    const { form, auth, authError, loginUserId } = useSelector(({ auth }) => ({
+            form: auth.login,
+            auth: auth.auth,
+            authError: auth.authError,
+            loginUserId: auth.loginUserId, // 확인 필요
+        }));
+    const [error, setError] = useState(null);
     const dispatch = useDispatch();
-    // dispatch(tempSetUser({username:'zee1994', password:'1234'}));
-    // dispatch(loginCheck());
-    const { user } = useSelector(({ user }) =>  ({ user: user.user }));
     
-    const onLogout = () => {
-        dispatch(logout());
-    }
+    const user = localStorage.getItem('userId');
+    const onLogout = () => dispatch(logout());
+
+    useEffect(() => {
+        // if (authError) {
+            console.log(auth);
+            console.log(loginUserId);
+        if (authError) {
+            if (authError) console.log(authError);
+            setError('로그아웃 실패');
+            return;
+        }else if (auth === 'logout' && !loginUserId) {
+            try {
+                localStorage.removeItem('userId');
+            } catch (e) {
+                console.log('local storage is not working.');
+            }
+        }
+    }, [auth, authError, loginUserId]);
+
     return (
         <div>
             <Header/>
-            {user ? // 서버 구현 후 user로 수정
+            {user ?
                 <MyPage onLogout={onLogout}/>
                 :
                 (<Redirect to="/login" />)
-                // (
-                //     <AuthTemplate>
-                //         <LoginForm />
-                //     </AuthTemplate>
-                // )
             }
         </div>
     );
 }
 
-export default MyPageContainer;
+export default withRouter(MyPageContainer);

@@ -5,7 +5,7 @@ import Header from '../../components/common/Header';
 const PlaceDetailPage = () => {
     return (
         <>
-            <Header />
+            {/* <Header /> */}
             <PlaceDetailContainer />
         </>
     );

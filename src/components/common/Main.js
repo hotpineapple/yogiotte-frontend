@@ -21,10 +21,10 @@ function Main() {
         <Route component={MyPage} path={'/mypage'} exact />
         <Route component={LoginPage} path={'/login'} />
         <Route component={RegisterPage} path={'/register'} />
-        <Route component={PlaceListPage} path={'/places/:category'} />
-        <Route component={PlaceDetailPage} path={'/place/:pid'} />
+        <Route component={PlaceListPage} path={'/place/:category'} />
+        <Route component={PlaceDetailPage} path={'/place/one/:id'} />
         <Route component={ReviewWritePage} path={'/write'} />
-        <Route component={ReviewListPage} path={'/reviews/:rid'} />
+        <Route component={ReviewListPage} path={'/reviews/:id'} />
         <Route component={SearchPage} path={'/search'} />
         <Route component={LocationPage} path={'/location'} />  
         <Route component={MyInfoPage} path={'/myinfo'} />  

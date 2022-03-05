@@ -18,7 +18,7 @@ const ReviewListContainer = ({ match }) => {
     );
 
     useEffect(() => { 
-        dispatch(listReviews({ rid:id, user }));
+        dispatch(listReviews({ id, user }));
         // console.log(reviews);
     }, [dispatch]);
 

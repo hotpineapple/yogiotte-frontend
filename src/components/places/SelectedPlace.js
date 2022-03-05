@@ -59,19 +59,23 @@ const ImageBox = styled.div`
 `;
 
 const SelectedPlace = ({ place }) => {
-    const { id, title, category } = place;
-    const url = `/place/${id}`;
+    const { id, name, maintype, subtype,address, img } = place;
+    const url = `/place/one/${id}`;
+    console.log(img);
+    // console.log(url);
     // const url = `/place`;
 
     return (
         <PlaceItemBlock>
             <PlaceItemContentBlock>
                 <ImageBox>
-                    <img src="/cafedam.jpg" />
+                    <img src={img} width="100%" height="100%" />
                 </ImageBox>
                 <SubInfo>
-                    <div style={{fontWeight:'bold', fontSize:'1.2rem', marginBottom:'0.5rem'}}>{title}</div>
-                    <div>{category}</div>
+                    <div style={{fontWeight:'bold', fontSize:'1.2rem', marginBottom:'0.5rem'}}>{name}</div>
+                    <div>{maintype}</div>
+                    <div>{subtype}</div>
+                    <div>{address}</div>
                     <br />
                     <Link to={url}>
                         <Button light>

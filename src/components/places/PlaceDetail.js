@@ -86,25 +86,26 @@ const Reviews = styled.div`
 `;
 
 const PlaceDetail2 = ({ place }) => {
-    const { id, name, location, menu, reviews, category } = place;
-    const url = `/reviews/${id}`;
+    // console.log(place);
+    const { id, name, maintype, subtype, address, reviews,img } = place;
+    const url = `/review/one/${id}`;
 
     return (
         <PlaceDetailContentBlock>
             <h3>{name}</h3>
             <ImageBox>
-                <img src="/cafedam.jpg" />
+                <img src={img} width="100%" heigth="100%"/>
             </ImageBox>
             <Bookmark>
                 <BookMarker pid={id} />
             </Bookmark>
             <SubInfo>
-                <span>{category}</span>
-                <span>{location}</span>
+                <span>{maintype}</span>
+                <span>{address}</span>
             </SubInfo>
             <DetailInfo>
                 <h4>대표 메뉴</h4>
-                <div>{menu}</div>
+                <div>{subtype}</div>
                 <h4>위치</h4>
                 <Map />
                 <h4>요기 리뷰</h4>

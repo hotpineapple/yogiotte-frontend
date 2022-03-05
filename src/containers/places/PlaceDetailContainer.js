@@ -5,8 +5,8 @@ import PlaceDetail from '../../components/places/PlaceDetail';
 import { placeDetail } from '../../modules/place';
 
 const PlaceDetailContainer = ({ match }) => {
-    let { pid } = match.params;
-
+    let id = match.params.id;
+    // console.log(`id:${id}`);
     const dispatch = useDispatch();
     const { place, error, loading } = useSelector(
         ({ place, loading }) => {
@@ -19,7 +19,7 @@ const PlaceDetailContainer = ({ match }) => {
     );
     
     useEffect(() => {
-        dispatch(placeDetail({ pid }));
+        dispatch(placeDetail({ id }));
     }, [dispatch]);
 
     return (

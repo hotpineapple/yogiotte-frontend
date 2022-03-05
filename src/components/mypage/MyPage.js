@@ -15,7 +15,7 @@ const MyPageBlock = styled(Responsive)`
         margin-bottom: 1rem;
     }
 `;
-const MyPage = ( { onLogout }) => {
+const MyPage = ( { onLogout}) => {
 
     const url1 = `/myinfo`;
     const url2 = `/myplace`;

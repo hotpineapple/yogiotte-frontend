@@ -3,20 +3,24 @@ import { useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { changeField, initializeForm, login } from '../../modules/auth';
 import AuthForm from '../../components/auth/AuthForm';
-import { loginCheck } from '../../modules/user';
+// import { loginCheck } from '../../modules/user';
 // import user from '../../modules/user';
 
 const LoginForm = ({ history }) => {
-    
+
     const [error, setError] = useState(null);
     const dispatch = useDispatch();
     
-    const { form, auth, authError, user } = useSelector(({ auth, user }) => ({
-        form: auth.login,
-        auth: auth.auth,
-        authError: auth.authError,
-        user: user.user,
-    }));
+    const { form, auth, authError, loginUserId } = useSelector(({ auth }) => {
+        // console.log('유즈 셀렉터가 먼가요?');
+        // console.log(auth);
+        return ({
+            form: auth.login,
+            auth: auth.auth,
+            authError: auth.authError,
+            loginUserId: auth.loginUserId, // 확인 필요
+        });
+    });
 
     const onChange = e => {
         const { value, name } = e.target;
@@ -41,29 +45,30 @@ const LoginForm = ({ history }) => {
     
     useEffect(() => {
         // if (authError) {
+            console.log(auth);
+            console.log(loginUserId);
         if (authError) {
             if (authError) console.log(authError);
-            return;
-        }
-        if(auth === false) {
             setError('아이디 또는 비밀번호가 틀립니다.');
             return;
-        } else if (auth === true) {
+        }else if (auth === 'login' && loginUserId) {
             console.log('로그인 성공');
-            dispatch(loginCheck());
         }
-    }, [auth, authError, dispatch]);
+    }, [auth, authError, loginUserId, dispatch]);
 
     useEffect(() => {
-        if (user) {
-            history.push('/');
+        console.log('local storage');
+        console.log('userId');
+        console.log(loginUserId);
+        if (loginUserId) {
             try {
-                localStorage.setItem('user', JSON.stringify(user));
+                localStorage.setItem('userId', loginUserId);
             } catch (e) {
                 console.log('local storage is not working.');
             }
+            history.push('/');
         }
-    }, [history, user]);
+    }, [history, loginUserId]);
 
     return (
         <AuthForm

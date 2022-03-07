@@ -5,12 +5,15 @@ import { changeField } from '../../modules/location';
 // import { changeField2, initialize } from '../../modules/isSearching';
 import LocationInput from '../../components/location/LocationInput';
 import LocationSelector from '../../components/location/LocationSelector';
+import { initializePlaces } from '../../modules/places';
 
 const { kakao } = window;
 
 const LocationContainer = () => {
     const dispatch = useDispatch();
     const { location } = useSelector(({ location }) => ({ location: location.location }));
+    
+    // dispatch(initializePlaces());
 
     var geocoder = new kakao.maps.services.Geocoder();
 

@@ -18,8 +18,8 @@ export default function createRequestSaga(type, request) {
                 type: SUCCESS,
                 payload: response.data,
             });
-            console.log('response.data');
-            console.log(response.data);
+            // console.log('response.data');
+            // console.log(response.data);
         } catch (e) {
             console.log(e);
             yield put({

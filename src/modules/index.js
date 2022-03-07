@@ -10,7 +10,8 @@ import reviews, { reviewsSaga } from './reviews';
 import keyword from './keyword';
 import location from './location';
 import selectedPlaceInMap from './selectedPlaceInMap';
-import isSearching from './isSearching';
+// import isSearching from './isSearching';
+import limit from './limit';
 
 const rootReducer = combineReducers({
     auth,
@@ -23,7 +24,8 @@ const rootReducer = combineReducers({
     keyword,
     location,
     selectedPlaceInMap,
-    isSearching,
+    // isSearching,
+    limit,
 });
 
 export function* rootSaga() {

@@ -1,12 +1,12 @@
 // import qs from 'qs';
 import client from './client';
 
-export const listPlaces = ({ type, category, keyword, location, user }) => {
+export const listPlaces = ({ type, category, keyword, location, user, limit }) => {
     // console.log('현재 type: ', type)
-    if (type === 'myplace') return client.get(`/myplace/${user.username}`);
-    else if (type === 'location') return client.get(`/place/location/${location.code}`);
-    else if (type === 'search') return client.get(`/place/search/${keyword}`);
-    else return client.get(`/place/${category}`);
+    if (type === 'myplace') return client.get(`/myplace/${user.username}?limit=${limit}`);
+    else if (type === 'location') return client.get(`/place/location/${location.code}?limit=${limit}`);
+    else if (type === 'search') return client.get(`/place/search/${keyword}?limit=${limit}`);
+    else return client.get(`/place/${category}?limit=${limit}`);
 }
 
 

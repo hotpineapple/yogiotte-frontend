@@ -12,11 +12,11 @@ const BookMarker = ({ pid }) => {
 
     if (marked === 'true') {
         return (
-            <BsFillBookmarkStarFill onClick={() => { setMarked('false')}} />
+            <BsFillBookmarkStarFill onClick={() => { setMarked('false'); /*(onBookmarkcancel(pid);*/ }} />
         );
     }
     return (
-        <BsBookmarkStar onClick={() => { setMarked('true')}} />
+        <BsBookmarkStar onClick={() => { setMarked('true'); /*onBookmark(pid);*/}} />
     );   
 };
 

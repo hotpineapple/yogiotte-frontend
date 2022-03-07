@@ -3,7 +3,7 @@ import { createAction, handleActions } from 'redux-actions';
 const INITIALIZE = 'search/initialize';
 const CHANGE_FIELD = 'search/CHANGE_FIELD';
 
-export const initialize = createAction(INITIALIZE);
+export const initializeKeyword = createAction(INITIALIZE);
 export const changeField = createAction(CHANGE_FIELD, (data) => (data));
 
 const initialState = {
@@ -13,10 +13,13 @@ const initialState = {
 const keyword = handleActions(
     {
         [INITIALIZE]: () => initialState,
-        [CHANGE_FIELD]: (state, { payload: keyword }) => ({
-            ...state,
-            keyword
-        }),
+        [CHANGE_FIELD]: (state, { payload: keyword }) => {
+            // console.log(keyword);
+            return ({
+                ...state,
+                keyword
+            })
+        },
     },
     initialState
 );

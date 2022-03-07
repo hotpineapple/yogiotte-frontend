@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useState, useEffect, useCallback, forwardRef } from 'react';
 import styled from 'styled-components';
 import Responsive from '../common/Responsive';
 import palette from '../../lib/styles/palette';
 import { Link } from 'react-router-dom';
+import Button from '../../components/common/Button';
+import AuthForm from '../auth/AuthForm';
+// import { scroller } from "react-scroll";
 
 const PlaceListBlock = styled(Responsive)`
     margin-top: 0.5rem;
@@ -55,7 +58,14 @@ const ImageBox = styled.div`
     overflow: hidden;
 `;
 
-const PlaceItem = ({ place }) => {
+const PlaceItem = forwardRef(({ place }, ref) => {
+    useEffect(() => {
+        // console.log('스크롤위치');
+        // console.log(localStorage.getItem('scroll'));
+        window.scrollTo(0, localStorage.getItem('scroll'), { behavior: 'auto' });
+        // document.getElementById('root').scrollTo(0, localStorage.getItem('scroll'), { behavior: 'auto' });
+    }, [place]);
+
     const { id, name, subtype, address, lat, lng, img } = place;
     // console.log(`/place/one/${id}`);
     const url = `/place/one/${id}`;
@@ -70,14 +80,18 @@ const PlaceItem = ({ place }) => {
             <SubInfo>
                 <span style={{ fontWeight: 'bold' }}>{name}</span>
                 <span>{subtype}</span>
-                <span>{address}</span>
+                <span ref={ref}>{address}</span>
             </SubInfo>
         </PlaceItemBlock>
     );
-}
+});
 
-const PlaceList = ({ title, loading, error, places }) => {
-
+const PlaceList = forwardRef(({ title, loading, error, places, scrollStart }, ref) => {
+    // const {
+    //     scrollTop
+    // } = this.state
+    
+    
     if (error) {
         return (
             <div>에러가 발생했습니다.</div>
@@ -89,18 +103,33 @@ const PlaceList = ({ title, loading, error, places }) => {
             <div>맛집이 없습니다.</div>
         );
     }
+
     return (
-        <PlaceListBlock>
+        <PlaceListBlock class="myscroll">
             <h3>{title}</h3>
             {!loading && places && (
+                <>
                 <div>
-                    {places.map(p => (
-                    <PlaceItem place={p} key={p.id}/>
+                    {places.map((p,idx) => (
+                        <React.Fragment key={idx}>
+                            {places.length - 1 === idx ? (
+                                <PlaceItem place={p} /*key={p.id}*/ ref={ref}/>
+                            ): (
+                                <PlaceItem place={p} /*key={p.id}*//>
+                            )}    
+                        </React.Fragment>
                     ))}
                 </div>
+                {/* <div>
+                    <Button light onClick={onmore}>
+                        더보기
+                    </Button>
+                </div> */}
+                </>
             )}
+            {loading && (<div>로딩중입니다.</div>)}
         </PlaceListBlock>
     );
-};
+});
 
-export default PlaceList;
+export default React.memo(PlaceList);

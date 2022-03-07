@@ -1,7 +1,7 @@
 import React, { useEffect, useCallback } from 'react';
 import SearchInput from '../../components/search/SearchInput';
 import { useSelector, useDispatch } from 'react-redux';
-import { changeField, initialize } from '../../modules/keyword';
+import { changeField, initializeKeyword } from '../../modules/keyword';
 
 const KeywordContainer = () => { 
     const dispatch = useDispatch();
@@ -10,7 +10,7 @@ const KeywordContainer = () => {
 
     useEffect(() => {
         return () => {
-            dispatch(initialize());
+            dispatch(initializeKeyword());
         };
     }, [dispatch]);
     

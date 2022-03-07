@@ -3,9 +3,10 @@ import React, { useEffect } from "react";
 import styled from 'styled-components';
 import Responsive from '../common/Responsive';
 import { useDispatch } from 'react-redux';
-import { initialize, changeField } from '../../modules/selectedPlaceInMap';
+import { initializeSelectedPlace, changeField } from '../../modules/selectedPlaceInMap';
 
 const { kakao } = window;
+
 const MapBlock = styled(Responsive)`
     // margin-top: 0.5rem;
 `;
@@ -24,7 +25,7 @@ const Maps = ({ places, title, smaller }) => {
 
         let options = {
             // center: new kakao.maps.LatLng(37.36892446719013, 127.10183457696866),
-            center: new kakao.maps.LatLng(places[0].lat,places[0].lng),
+            center: new kakao.maps.LatLng(places[0].lat, places[0].lng),
             level: 5,
         };
 
@@ -103,7 +104,7 @@ const Maps = ({ places, title, smaller }) => {
     
             // 클릭한 위도, 경도 정보를 가져옵니다 
             var latlng = mouseEvent.latLng;
-            dispatch(initialize());
+            dispatch(initializeSelectedPlace());
             // var message = '클릭한 위치의 위도는 ' + latlng.getLat() + ' 이고, ';
             // message += '경도는 ' + latlng.getLng() + ' 입니다';
             
